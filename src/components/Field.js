@@ -49,6 +49,15 @@ class Field {
     this.animationFrame = null;
   }
 
+  pause() {
+    if(this.animationFrame) {
+      this.stop();
+    } 
+    else {
+      this.start();
+    }
+  }
+
   clear() {
     this.ctx.fillStyle = this.BG;
     this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
