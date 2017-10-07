@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">	
+	<meta charset="UTF-8">
+	<title>Test for Library</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    #tester {
+      padding: 0;
+      height: 700px;
+      width: 800px;
+      margin: 0 auto;
+    }
+  </style>
+</head>
+<body>
+  <div id="tester">
+	<script src="starfield.js"></script>
+  <!--<script>bokehfy.init()</script>-->
+  <script>
+    const diver = document.getElementById('tester')
+    bokehfy.init(diver)
+  </script>
+</body>
+</html>
