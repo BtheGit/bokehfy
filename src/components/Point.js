@@ -1,33 +1,37 @@
 'use strict'
 
 class Point {
-  constructor(canvas, ctx, color, framerate) {
-    this.PRESETS = {
-      max_dx:5,
-      max_dy:2,
-      max_r: 35,
-      halflife: 8000 / framerate
-    };
+  constructor({
+      canvas, 
+      ctx, 
+      color = {r: 77, g: 101, b: 181}, 
+      halflifeRatio = 250,
+      maxRadius = 35,
+      maxDX = 5,
+      maxDY = 2
+    }) {
+    this.max_dx = maxDX;
+    this.max_dy = maxDY;
+    this.max_r = maxRadius;
     this.canvas = canvas;
     this.ctx = ctx;
     this.color = color;
-    this.reset();
-  }
-
-  reset() {
+    this.halflifeRatio = halflifeRatio;
     this.x = Math.random() * this.canvas.width;
     this.y = Math.random() * this.canvas.height;
-    this.r = (Math.random() * this.PRESETS.max_r) + 1;
-    this.dx = (Math.random() * this.PRESETS.max_dx) * (Math.random() > .5 ? -1 : 1);
-    this.dy = (Math.random() * this.PRESETS.max_dx) * (Math.random() > .5 ? -1 : 1);
-    this.hl = this.PRESETS.halflife * (this.r / this.PRESETS.max_r);
+    this.r = (Math.random() * this.max_r) + 1;
+    this.dx = (Math.random() * this.max_dx) * (Math.random() > .5 ? -1 : 1);
+    this.dy = (Math.random() * this.max_dx) * (Math.random() > .5 ? -1 : 1);
+    this.halflife = this.halflifeRatio * (this.r / this.max_r);
     this.colorStop = (Math.random() * .2) + .4;
-    this.ratio = Math.random() * this.hl;
-    this.dratio = Math.random() + 1;
+    this.ratio = Math.random() * this.halflife;
+    this.dratio = Math.random() + 1;    
   }
 
+  //### API
+
   draw() {
-    if(this.ratio <= 0 || this.ratio >= this.hl) {
+    if(this.ratio <= 0 || this.ratio >= this.halflife) {
       this.dratio *= -1;
     }
 
@@ -36,7 +40,7 @@ class Point {
     this.ctx.closePath();
     this.ctx.fill();
 
-    const opacity = 1 - (this.ratio/this.hl);
+    const opacity = 1 - (this.ratio/this.halflife);
     const opacityRatio = this.ratio * opacity;
     const gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, (opacityRatio <= 0 ? 1 : opacityRatio));
     gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
@@ -47,14 +51,29 @@ class Point {
   }
 
   move() {
-    this.x += (this.ratio / this.hl) * this.dx;
-    this.y += (this.ratio / this.hl) * this.dy;
+    this.x += (this.ratio / this.halflife) * this.dx;
+    this.y += (this.ratio / this.halflife) * this.dy;
     if(this.x > (this.canvas.width + 50) || this.x < -50) this.dx *= -1;
     if(this.y > (this.canvas.height + 50) || this.y < -50) this.dy *= -1;
   }
 
   pulse() {
     this.ratio += this.dratio;
+  }
+
+
+  recolor(color) {
+    this.color = color;
+  }
+
+  changeHalflife(newHalflife) {
+    this.halflifeRatio = newHalflife;
+    this.halflife = this.halflifeRatio * (this.r / this.max_r);
+  }
+
+  resize(newMaxRadius) {
+    this.max_r = newMaxRadius;
+    this.r = (Math.random() * this.max_r) + 1;
   }
 }
 

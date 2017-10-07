@@ -1,5 +1,6 @@
 'use strict'
 const Field = require('./components/Field');
+const tinyColor = require('tinycolor2');
 
 //   /**
 //    * Take in a hex value for a color (later any type) and return an object
@@ -15,10 +16,10 @@ const Field = require('./components/Field');
 class Bokehfy {
   constructor(parentElement = window.document.body) {
     this.parent = parentElement;
-    this.canvas = this.createCanvas(this.parent);
-    this.field = this.init(this.canvas);
-    this.fitCanvas = this.fitCanvas.bind(this);
-    window.addEventListener('resize', this.fitCanvas)
+    this.canvas = this._createCanvas(this.parent);
+    this.field = this._init(this.canvas);
+    this._fitCanvas = this._fitCanvas.bind(this);
+    window.addEventListener('resize', this._fitCanvas)
   };
 
   /**
@@ -28,8 +29,8 @@ class Bokehfy {
    * @param  {Node} parentNode [Optional: Parent element that will contain the canvas]
    * @return {Field}        [An instance of the bokehfy field with public methods]
    */
-  init() {
-    this.fitCanvas()
+  _init() {
+    this._fitCanvas()
     const field = new Field(this.canvas)
     return field;    
   }
@@ -40,7 +41,7 @@ class Bokehfy {
    * @param  {Node} parent [Container for canvas - body if none povided]
    * @return {canvas}               [canvas element attached to DOM]
    */
-  createCanvas() {
+  _createCanvas() {
     const canvas = window.document.createElement('canvas')
     if(this.parent === window.document.body) {
       canvas.setAttribute('style', "position: fixed; top: 0; left: 0;")
@@ -53,7 +54,7 @@ class Bokehfy {
    * Canvas will be resized to fit it's current parent
    * @param  {Canvas} canvas [Canvas already attached to DOM]
    **/
-  fitCanvas() {
+  _fitCanvas() {
     const width = this.canvas.parentNode.clientWidth;
     const height = this.canvas.parentNode.clientHeight;
     this.canvas.setAttribute('width', width)
@@ -67,7 +68,7 @@ class Bokehfy {
   }
 
   delete() {
-    window.removeEventListener('resize', this.fitCanvas)
+    window.removeEventListener('resize', this._fitCanvas)
     this.parent.removeChild(this.canvas)
   }
 
@@ -76,18 +77,64 @@ class Bokehfy {
    * @param  {[type]} obj [description]
    * @return {[type]}     [description]
    * {
-   *   backgroundColor,
+   *   background,
    *   pointColor,
    *   pointCount,
    *   speed,
    *   size
    * }
    */
-  settings(obj) {
-
+  settings(obj = {}) {
+    //Enumerate through all keys of object.
   }
 
+  backgroundColor(newColor = '') {
+    const color = tinyColor(newColor);
+    if(color.isValid() && this.field) {
+      this.field.changeBackgroundColor(color.toHexString());
+    }
+  }
 
+  toggleBackground() {
+    if(this.field) {
+      this.field.toggleBackground();
+    }
+  }
+
+  //TODO: Validate input for numbers between a certain range
+  resize(newMaxRadius) {
+    if(this.field) {
+      this.field.resizePoints(newMaxRadius);
+    }
+  }
+
+  recolor(newPointColor = '') {
+    const color = tinyColor(newPointColor)
+    if(color.isValid() && this.field) {
+      this.field.recolorPoints(color.toRgb());
+    }
+  }
+
+  //TODO: Validate input for numbers between a certain range
+  density(newDensity) {
+    if(this.field) {
+      this.field.changeDensity(newDensity);
+    }
+  }
+
+  //TODO: Validate input for numbers between a certain range
+  changeHalflife(newHalflife) {
+    if(this.field) {
+      this.field.changeHalflife(newHalflife);
+    }
+  }
+
+  //TODO: Validate input for numbers between a certain range
+  framerate(newFramerate) {
+    if(this.field){
+      this.field.changeFramerate(newFramerate);
+    }
+  }
 }
 
 module.exports = Bokehfy;

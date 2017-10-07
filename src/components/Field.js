@@ -1,76 +1,125 @@
 'use strict'
 const Point = require('./Point');
 
-const FRAMERATE = 60;
-const INTERVAL = 1000 / FRAMERATE;
-
 /**
  * A new canvas will be created
  */
 class Field {
   constructor(canvas) {
+    this.interval = this._setInterval()
     this.animationFrame = null;
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
+    this.transparent = false;
     this.BG = '#111';
     this.pointColor = {r: 77, g: 101, b: 181};
-    this.points = this.generatePoints();
-    this.start()
+    this.points = this._generatePoints();
+    this._start()
   }
 
-  generatePoints() {
+  //Can validate numbers here (though not public)
+  _setInterval(framerate = 60) {
+    return 1000 / framerate;
+  }
+
+  _generatePoints(density = 100) {
     const points = [];
-    for (let i = 0; i < 100; i++) {
-      points.push(new Point(this.canvas, this.ctx, this.pointColor, 30))
+    for (let i = 0; i < density; i++) {
+      points.push(new Point({
+        canvas: this.canvas, 
+        ctx: this.ctx, 
+        color: this.pointColor
+      }))
     }
     return points;
   }
 
-  start() {
+  _start() {
     let then = Date.now()
     let delta;
 
     const draw = timestamp => {
       const now = Date.now(timestamp);
       delta = now - then;
-      if(delta > INTERVAL) {
-        this.clear();
-        this.animatePoints();
+      if(delta > this.interval) {
+        this._clear();
+        this._animatePoints();
 
-        then = now - (delta % INTERVAL)
+        then = now - (delta % this.interval)
       }
       this.animationFrame = requestAnimationFrame(draw);
     }
     this.animationFrame = requestAnimationFrame(draw)
   }
 
-  stop() {
+  _stop() {
     cancelAnimationFrame(this.animationFrame)
     this.animationFrame = null;
   }
 
-  pause() {
-    if(this.animationFrame) {
-      this.stop();
-    } 
+  _clear() {
+    if(this.transparent) {
+      this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+    }
     else {
-      this.start();
+      this.ctx.fillStyle = this.BG;
+      this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
     }
   }
 
-  clear() {
-    this.ctx.fillStyle = this.BG;
-    this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
-    // ctx.clearRect(0,0, canvas.width, canvas.height)
-  }
-
-  animatePoints() {
+  _animatePoints() {
     for(let i = 0; i < this.points.length; i++) {
       this.points[i].pulse();
       this.points[i].draw();
       this.points[i].move();
     }      
   }
+
+  //### API
+  pause() {
+    if(this.animationFrame) {
+      this._stop();
+    } 
+    else {
+      this._start();
+    }
+  }
+
+  recolorPoints(color) {
+    this.points.forEach(point => {
+      point.recolor(color);
+    });
+  }
+
+  changeBackgroundColor(color) {
+    this.BG = color;
+  }
+
+  toggleBackground() {
+    this.transparent = !this.transparent;
+  }
+
+  resizePoints(newMaxRadius) {
+    this.points.forEach(point => {
+      point.resize(newMaxRadius);
+    })
+  }
+
+  changeDensity(newDensity) {
+    this.points = this._generatePoints(newDensity);
+  }
+
+  changeHalflife(newHalflife) {
+    this.points.forEach(point => {
+      point.changeHalflife(newHalflife);
+    })
+  }
+
+  //Validate framerate is between certain range
+  changeFramerate(newFramerate) {
+    this.interval = this._setInterval(newFramerate);
+  }
+
 }
 
 module.exports = Field;

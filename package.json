@@ -16,5 +16,8 @@
     "chai": "^4.1.2",
     "mocha": "^4.0.1",
     "webpack": "^3.6.0"
+  },
+  "dependencies": {
+    "tinycolor2": "^1.4.1"
   }
 }
