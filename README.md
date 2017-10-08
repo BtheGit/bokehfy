@@ -23,17 +23,26 @@ Save the result of bokehfy() to a variable to have access to additional methods.
 
 ```const field = bokehfy();```
 
-#### Methods
+### Methods
 
-pause()
-delete()
-backgroundColor()
-toggleBackground()
-resize()
-recolor()
-density()
-halflife()
-framerate()
+#### pause
+
+#### delete
+
+#### backgroundColor
+
+#### toggleBackground
+
+#### resize
+
+#### recolor
+
+#### density
+
+#### halflife
+
+#### framerate
+
 
 
 Notes:
