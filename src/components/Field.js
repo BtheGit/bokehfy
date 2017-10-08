@@ -13,6 +13,7 @@ class Field {
     this.transparent = false;
     this.BG = '#111';
     this.pointColor = {r: 77, g: 101, b: 181};
+    this.pointRadius = 35;
     this.points = this._generatePoints();
     this._start()
   }
@@ -28,7 +29,8 @@ class Field {
       points.push(new Point({
         canvas: this.canvas, 
         ctx: this.ctx, 
-        color: this.pointColor
+        color: this.pointColor,
+        maxRadius: this.pointRadius
       }))
     }
     return points;
@@ -101,6 +103,7 @@ class Field {
   }
 
   resizePoints(newMaxRadius) {
+    this.pointRadius = newMaxRadius;
     this.points.forEach(point => {
       point.resize(newMaxRadius);
     })
