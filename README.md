@@ -6,13 +6,18 @@
 ### Getting Started
 
 In Node.js:
+
 ```npm i -S bokehfy```
 
 ```import bokehfy from 'bokehfy'```
+
 or 
+
 ```const bokehfy = require('bokehfy')```
 
+
 In the browser:
+
 Add bokehfy.min.js to your webpage.
 
 Create a new Bokeh field instance by calling bokehfy()

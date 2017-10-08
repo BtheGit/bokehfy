@@ -1,8 +1,8 @@
 {
   "name": "bokehfy",
-  "version": "1.0.0",
+  "version": "0.1.0",
   "description": "Add a flickering bokeh experience to any DOM element.",
-  "main": "index.js",
+  "main": "./lib/bokehfy.min.js",
   "scripts": {
     "build": "webpack --env.prod",
     "dev": "webpack --watch --colors --progress --env.dev"

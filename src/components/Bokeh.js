@@ -32,10 +32,8 @@ class Bokeh {
    */
   _createCanvas() {
     const canvas = window.document.createElement('canvas')
-    if(this.parent === window.document.body) {
-      canvas.setAttribute('style', "position: fixed; top: 0; left: 0;")
-    }
-    this.parent.appendChild(canvas);
+    canvas.setAttribute('style', "position: absolute; top: 0; left: 0;")
+    this.parent.prepend(canvas);
     return canvas;
   }
 
