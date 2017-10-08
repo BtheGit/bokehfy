@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const field = bokehfy(canvas);
-field.backgroundColor(rgb(49, 159, 159));
+field.backgroundColor('rgb(49, 159, 159)');
 field.framerate(20);
 field.color('#FFF');
 field.halflife(542);
