@@ -1,6 +1,10 @@
 const canvas = document.getElementById('canvas');
 const field = bokehfy(canvas)
 field.recolor('#FFF')
+field.halflife(542)
+field.radius(87)
+field.dx(4)
+field.dy(4)
 
 const inFramerate = document.getElementById('in-framerate'),
       inHalflife = document.getElementById('in-halflife'),
@@ -39,7 +43,6 @@ function changeDensity(e) {
 }
 
 function changeBackground(e) {
-  console.log(e)
   field.backgroundColor(e.target.value)
 }
 
