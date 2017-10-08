@@ -5,9 +5,56 @@ html, body {
   padding: 0;
 }
 
-#canvas {
-  padding: 0;
-  height: 400px;
-  width: 400px;
+.container {
+  width: 1000px;
+  height: 100%;
   margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background-color: #efefef;
+}
+
+.header {
+  width: 100%;
+  height: 120px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 5em;
+  font-family: 'Poiret One', serif;
+}
+
+.canvas-container {
+  width: 100%;
+  height: 250px;
+  display: flex;
+  justify-content: center;
+  align-items: center;  
+}
+
+#canvas {
+  position: relative;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.tools {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+label {
+  margin: 5px;
+}
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 60%;
+  height: 5px;
+  background-color: #A9A9A9
 }

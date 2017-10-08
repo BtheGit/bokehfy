@@ -3,12 +3,35 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">	
 	<meta charset="UTF-8">
-	<title>Test for Library</title>
+	<title>bokehfy</title>
+  <link href="https://fonts.googleapis.com/css?family=Poiret+One" rel="stylesheet">
   <link rel="stylesheet" href="index.css">
 </head>
 <body>
-  <div id="canvas">
-  <script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.1/lib/bokehfy.min.js"></script>
+  <a href="https://github.com/BtheGit/bokehfy"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/365986a132ccd6a44c23a9169022c0b5c890c387/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f7265645f6161303030302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png"></a>
+  <div class="container">
+    <div class="header">bokehfy</div>
+    <div class="canvas-container">
+      <div id="canvas"></div>
+    </div>
+    <div class="tools">
+      <label for="framerate">Framerate</label>
+      <input type="range" id="in-framerate" min="1" max="150" value="60" name="framerate">
+      <label for="halflife">Point Intensity</label>
+      <input type="range" id="in-halflife" min="1" max="1500" value="250" name="halflife">
+      <label for="resize">Resize</label>
+      <input type="range" id="in-resize" min="1" max="300" value="35" name="resize">
+      <label for="density">Density</label>
+      <input type="range" id="in-density" min="1" max="300" value="100" name="density">
+      <label for="background">Background Color</label>
+      <input type="color" id="in-background" name="background" value="#225555">
+      <label for="transparent">Transparent Background</label>
+      <input type="checkbox" id="in-transparent" name="transparent">
+      <label for="color">Point Color</label>
+      <input type="color" id="in-color" name="color" value="#FFFFFF">
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.2/lib/bokehfy.min.js"></script>
   <script src="index.js"></script>
 </body>
 </html>
