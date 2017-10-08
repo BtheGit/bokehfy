@@ -1,10 +1,12 @@
 const canvas = document.getElementById('canvas');
-const field = bokehfy(canvas)
-field.color('#FFF')
-field.halflife(542)
-field.radius(87)
-field.dx(4)
-field.dy(4)
+const field = bokehfy(canvas);
+field.framerate(20);
+field.color('#FFF');
+field.backgroundColor(#409F9F);
+field.halflife(542);
+field.radius(87);
+field.dx(4);
+field.dy(4);
 
 const inFramerate = document.getElementById('in-framerate'),
       inHalflife = document.getElementById('in-halflife'),
