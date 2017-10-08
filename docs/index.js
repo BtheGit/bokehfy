@@ -19,8 +19,8 @@ const liFramerate = inFramerate.addEventListener('input', changeFramerate),
       liBackground = inBackground.addEventListener('change', changeBackground),
       liTransparent = inTransparent.addEventListener('change', changeTransparent),
       liColor = inColor.addEventListener('change', changeColor),
-      liDx = inDx.addEventListener('input', changeDy),
-      liDy = inDy.addEventListener('input', changeDx);
+      liDx = inDx.addEventListener('input', changeDx),
+      liDy = inDy.addEventListener('input', changeDy);
 
 function changeFramerate(e) {
   field.framerate(e.target.value)
