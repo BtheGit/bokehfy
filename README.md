@@ -40,9 +40,9 @@ Save the result of bokehfy() to a variable to have access to additional methods.
 
 #### toggleBackground
 
-#### resize
+#### radius
 
-#### recolor
+#### color
 
 #### density
 
