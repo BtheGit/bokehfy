@@ -57,4 +57,4 @@ Save the result of bokehfy() to a variable to have access to additional methods.
 
 
 Notes:
-ES5 module.exports used in favor of import/export to avoid open webpack issue that means library is acessible as 'libraryName.default' rather than just 'libraryName'
+ES5 module.exports used in favor of import/export to avoid open webpack issue that means library is accessible as 'libraryName.default' rather than just 'libraryName'

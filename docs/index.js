@@ -1,6 +1,6 @@
 const canvas = document.getElementById('canvas');
 const field = bokehfy(canvas)
-field.recolor('#FFF')
+field.color('#FFF')
 field.halflife(542)
 field.radius(87)
 field.dx(4)
@@ -8,7 +8,7 @@ field.dy(4)
 
 const inFramerate = document.getElementById('in-framerate'),
       inHalflife = document.getElementById('in-halflife'),
-      inResize = document.getElementById('in-resize'),
+      inRadius = document.getElementById('in-radius'),
       inDensity = document.getElementById('in-density'),
       inBackground = document.getElementById('in-background'),
       inTransparent = document.getElementById('in-transparent'),
@@ -18,7 +18,7 @@ const inFramerate = document.getElementById('in-framerate'),
 
 const liFramerate = inFramerate.addEventListener('input', changeFramerate),
       liHalflife = inHalflife.addEventListener('input', changeHalflife),
-      liResize = inResize.addEventListener('input', changeResize),
+      liRadius = inRadius.addEventListener('input', changeRadius),
       liDensity = inDensity.addEventListener('input', changeDensity),
       liBackground = inBackground.addEventListener('change', changeBackground),
       liTransparent = inTransparent.addEventListener('change', changeTransparent),
@@ -34,8 +34,8 @@ function changeHalflife(e) {
   field.halflife(e.target.value)
 }
 
-function changeResize(e) {
-  field.resize(e.target.value)
+function changeRadius(e) {
+  field.radius(e.target.value)
 }
 
 function changeDensity(e) {
@@ -51,7 +51,7 @@ function changeTransparent(e) {
 }
 
 function changeColor(e) {
-  field.recolor(e.target.value)
+  field.color(e.target.value)
 }
 
 function changeDx(e) {

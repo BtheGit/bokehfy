@@ -89,13 +89,13 @@ class Bokeh {
   }
 
   //TODO: Validate input for numbers between a certain range
-  resize(newMaxRadius) {
+  radius(newMaxRadius) {
     if(this.field) {
       this.field.resizePoints(newMaxRadius);
     }
   }
 
-  recolor(newPointColor = '') {
+  color(newPointColor = '') {
     const color = tinyColor(newPointColor)
     if(color.isValid() && this.field) {
       this.field.recolorPoints(color.toRgb());
