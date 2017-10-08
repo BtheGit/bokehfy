@@ -1,8 +1,8 @@
 const canvas = document.getElementById('canvas');
 const field = bokehfy(canvas);
+field.backgroundColor(rgb(49, 159, 159));
 field.framerate(20);
 field.color('#FFF');
-field.backgroundColor(#409F9F);
 field.halflife(542);
 field.radius(87);
 field.dx(4);
