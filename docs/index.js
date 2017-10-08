@@ -8,7 +8,9 @@ const inFramerate = document.getElementById('in-framerate'),
       inDensity = document.getElementById('in-density'),
       inBackground = document.getElementById('in-background'),
       inTransparent = document.getElementById('in-transparent'),
-      inColor = document.getElementById('in-color');
+      inColor = document.getElementById('in-color'),
+      inDx = document.getElementById('in-dx'),
+      inDy = document.getElementById('in-dy');
 
 const liFramerate = inFramerate.addEventListener('input', changeFramerate),
       liHalflife = inHalflife.addEventListener('input', changeHalflife),
@@ -16,7 +18,9 @@ const liFramerate = inFramerate.addEventListener('input', changeFramerate),
       liDensity = inDensity.addEventListener('input', changeDensity),
       liBackground = inBackground.addEventListener('change', changeBackground),
       liTransparent = inTransparent.addEventListener('change', changeTransparent),
-      liColor = inColor.addEventListener('change', changeColor);
+      liColor = inColor.addEventListener('change', changeColor),
+      liDx = inDx.addEventListener('input', changeDy),
+      liDy = inDy.addEventListener('input', changeDx);
 
 function changeFramerate(e) {
   field.framerate(e.target.value)
@@ -45,4 +49,12 @@ function changeTransparent(e) {
 
 function changeColor(e) {
   field.recolor(e.target.value)
+}
+
+function changeDx(e) {
+  field.dx(e.target.value)
+}
+
+function changeDy(e) {
+  field.dy(e.target.value)
 }

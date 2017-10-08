@@ -74,6 +74,17 @@ class Point {
   resize(newMaxRadius) {
     this.max_r = newMaxRadius;
     this.r = (Math.random() * this.max_r) + 1;
+    this.halflife = this.halflifeRatio * (this.r / this.max_r);    
+  }
+
+  changeDX(newDX) {
+    this.max_dx = newDX;    
+    this.dx = (Math.random() * this.max_dx) * (Math.random() > .5 ? -1 : 1);
+  }
+
+  changeDY(newDY) {
+    this.max_dy = newDY;
+    this.dy = (Math.random() * this.max_dy) * (Math.random() > .5 ? -1 : 1);
   }
 }
 

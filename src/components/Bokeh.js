@@ -118,10 +118,24 @@ class Bokeh {
 
   //TODO: Validate input for numbers between a certain range
   framerate(newFramerate) {
-    if(this.field){
+    if(this.field) {
       this.field.changeFramerate(newFramerate);
     }
   }
+
+  //TODO: Validate input for numbers between a certain range
+  dx(newDX) {
+    if(this.field) {
+      this.field.changeDX(newDX);
+    }
+  }
+  //TODO: Validate input for numbers between a certain range
+  dy(newDY) {
+    if(this.field) {
+      this.field.changeDY(newDY);
+    }
+  }
+
 }
 
 module.exports = Bokeh;

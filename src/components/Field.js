@@ -14,6 +14,9 @@ class Field {
     this.BG = '#111';
     this.pointColor = {r: 77, g: 101, b: 181};
     this.pointRadius = 35;
+    this.pointHalflife = 250;
+    this.pointDX = 5;
+    this.pointDY = 2;
     this.points = this._generatePoints();
     this._start()
   }
@@ -30,7 +33,10 @@ class Field {
         canvas: this.canvas, 
         ctx: this.ctx, 
         color: this.pointColor,
-        maxRadius: this.pointRadius
+        maxRadius: this.pointRadius,
+        halflifeRatio: this.pointHalflife,
+        maxDX: this.pointDX,
+        maxDY: this.pointDY
       }))
     }
     return points;
@@ -105,7 +111,7 @@ class Field {
   resizePoints(newMaxRadius) {
     this.pointRadius = newMaxRadius;
     this.points.forEach(point => {
-      point.resize(newMaxRadius);
+      point.resize(this.pointRadius);
     })
   }
 
@@ -114,8 +120,23 @@ class Field {
   }
 
   changeHalflife(newHalflife) {
+    this.pointHalflife = newHalflife
     this.points.forEach(point => {
-      point.changeHalflife(newHalflife);
+      point.changeHalflife(this.pointHalflife);
+    })
+  }
+
+  changeDX(newDX) {
+    this.pointDX = newDX;
+    this.points.forEach(point => {
+      point.changeDX(this.pointDX)
+    })
+  }
+
+  changeDY(newDY) {
+    this.pointDY = newDY;
+    this.points.forEach(point => {
+      point.changeDY(this.pointDY)
     })
   }
 
@@ -123,7 +144,6 @@ class Field {
   changeFramerate(newFramerate) {
     this.interval = this._setInterval(newFramerate);
   }
-
 }
 
 module.exports = Field;
