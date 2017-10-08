@@ -86,8 +86,9 @@ class Field {
   }
 
   recolorPoints(color) {
+    this.pointColor = color;
     this.points.forEach(point => {
-      point.recolor(color);
+      point.recolor(this.pointColor);
     });
   }
 
