@@ -112,7 +112,7 @@ class Bokeh {
   }
 
   //TODO: Validate input for numbers between a certain range
-  changeHalflife(newHalflife) {
+  halflife(newHalflife) {
     if(this.field) {
       this.field.changeHalflife(newHalflife);
     }
