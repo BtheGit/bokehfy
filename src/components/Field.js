@@ -18,7 +18,7 @@ class Field {
   }
 
   //Can validate numbers here (though not public)
-  _setInterval(framerate = 60) {
+  _setInterval(framerate = 30) {
     return 1000 / framerate;
   }
 
