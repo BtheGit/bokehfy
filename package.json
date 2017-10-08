@@ -1,6 +1,6 @@
 {
   "name": "bokehfy",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Add a flickering bokeh experience to any DOM element.",
   "main": "./lib/bokehfy.min.js",
   "scripts": {
@@ -8,7 +8,7 @@
     "dev": "webpack --watch --colors --progress --env.dev"
   },
   "author": "Brendan Beltz <brendanwebdev@gmail.com> (https://github.com/bthegit)",
-  "bugs" : {
+  "bugs": {
     "url": "https://github.com/BtheGit/bokehfy/issues"
   },
   "license": "ISC",
