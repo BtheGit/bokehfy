@@ -3,6 +3,8 @@
 ## A super-light library to add flickering bokeh points to the DOM
 [Demo](https://bthegit.github.io/bokehfy/)
 
+![Screenshot](bokehfy2.png)
+
 ### Getting Started
 
 In Node.js:
@@ -20,7 +22,7 @@ In the browser:
 
 Add bokehfy.min.js to your webpage.
 
-```<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.1/lib/bokehfy.min.js"></script>```
+```<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.7/lib/bokehfy.min.js"></script>```
 
 Create a new Bokeh field instance by calling bokehfy()
 Bokehfy takes an optional parameter of an HTML element. 
