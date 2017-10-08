@@ -4,8 +4,8 @@
   "description": "Add a flickering bokeh experience to any DOM element.",
   "main": "index.js",
   "scripts": {
-    "build": "webpack",
-    "dev": "webpack --watch"
+    "build": "webpack --env.prod",
+    "dev": "webpack --watch --colors --progress --env.dev"
   },
   "author": "Brendan Beltz",
   "license": "ISC",
