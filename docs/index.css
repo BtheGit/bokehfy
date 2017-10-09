@@ -71,7 +71,6 @@ html, body {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
-  flex-wrap: wrap;
 }
 
 .tool {
