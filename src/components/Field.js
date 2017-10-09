@@ -10,6 +10,7 @@ class Field {
     this.transparent = false;
     this.BG = '#111';
     this.pointColor = {r: 77, g: 101, b: 181};
+    this.gradient = null;
     this.pointRadius = 35;
     this.pointHalflife = 250;
     this.pointDX = 5;
@@ -18,7 +19,6 @@ class Field {
     this._start()
   }
 
-  //Can validate numbers here (though not public)
   _setInterval(framerate = 30) {
     return 1000 / framerate;
   }
@@ -33,7 +33,8 @@ class Field {
         maxRadius: this.pointRadius,
         halflifeRatio: this.pointHalflife,
         maxDX: this.pointDX,
-        maxDY: this.pointDY
+        maxDY: this.pointDY,
+        gradient: this.gradient
       }))
     }
     return points;
@@ -97,6 +98,13 @@ class Field {
     });
   }
 
+  setGradient(colors) {
+    this.gradient = colors;
+    this.points.forEach(point => {
+      point.addGradient(this.gradient);
+    })
+  }
+
   changeBackgroundColor(color) {
     this.BG = color;
   }
@@ -137,7 +145,6 @@ class Field {
     })
   }
 
-  //Validate framerate is between certain range
   changeFramerate(newFramerate) {
     this.interval = this._setInterval(newFramerate);
   }

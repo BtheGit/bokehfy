@@ -6,6 +6,18 @@ const { isValidNumber, fixInRange } = require('../utilities/');
 
 class Bokeh {
   constructor(parentElement) {
+    this.API = {
+      backgroundColor: this.backgroundColor,
+      transparent: this.transparent,
+      radius: this.radius,
+      color: this.color,
+      gradient: this.gradient,
+      density: this.density,
+      halflife: this.halflife,
+      framerate: this.framerate,
+      dx: this.dx,
+      dy: this.dy
+    }
     this.parent = parentElement;
     this.canvas = this._createCanvas(this.parent);
     this.field = this._init(this.canvas);
@@ -50,7 +62,7 @@ class Bokeh {
     this.canvas.setAttribute('height', height)    
   }
 
-  //API
+  //#### API
 
   pause() {
     this.field.pause();
@@ -61,26 +73,30 @@ class Bokeh {
     this.parent.removeChild(this.canvas)
   }
 
-  /**
-   * Take in custom settings object with parameters. Change parameters if possible.
-   * @param  {[type]} obj [description]
-   * @return {[type]}     [description]
-   * {
-   *   background,
-   *   pointColor,
-   *   pointCount,
-   *   speed,
-   *   size
-   * }
-   */
-  settings(obj = {}) {
-    //Enumerate through all keys of object.
+  settings(obj) {
+    if(obj === Object(obj) && typeof obj === 'object') {
+      const array = Object.entries(obj);
+      array.forEach(cmd => {
+        const key = cmd[0];
+        const args = cmd[1]
+        if(this.API.hasOwnProperty(key)) {
+          let func = this.API[key]
+          func.call(this, args)
+        }
+      })
+    }
   }
 
   backgroundColor(newColor = '') {
     const color = tinyColor(newColor);
     if(color.isValid() && this.field) {
       this.field.changeBackgroundColor(color.toHexString());
+    }
+  }
+
+  transparent(isTrans) {
+    if(this.field) {
+      this.field.setTransparency(isTrans);
     }
   }
 
@@ -101,6 +117,16 @@ class Bokeh {
     const color = tinyColor(newPointColor)
     if(color.isValid() && this.field) {
       this.field.recolorPoints(color.toRgb());
+    }
+  }
+
+  gradient(colorArray) {
+    if(Array.isArray(colorArray) && colorArray.length) {
+      let colors = colorArray.map(color => tinyColor(color));
+      if(colors.every(color => color.isValid())){
+        colors = colors.map(color => color.toRgb());
+        this.field.setGradient(colors);
+      }
     }
   }
 

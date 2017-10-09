@@ -4,7 +4,8 @@ class Point {
   constructor({
       canvas, 
       ctx, 
-      color = {r: 77, g: 101, b: 181}, 
+      color = {r: 77, g: 101, b: 181},
+      gradient = null, 
       halflifeRatio = 250,
       maxRadius = 35,
       maxDX = 5,
@@ -16,6 +17,7 @@ class Point {
     this.canvas = canvas;
     this.ctx = ctx;
     this.color = color;
+    this.gradient = gradient;
     this.halflifeRatio = halflifeRatio;
     this.x = Math.random() * this.canvas.width;
     this.y = Math.random() * this.canvas.height;
@@ -26,7 +28,7 @@ class Point {
     this.colorStop = (Math.random() * .2) + .4;
     this.ratio = Math.random() * this.halflife;
     this.dratio = Math.random() + 1;
-    this.gradient = null;
+    this.fillStyle = null;
   }
 
   //### API
@@ -41,13 +43,8 @@ class Point {
     this.ctx.closePath();
     this.ctx.fill();
 
-    const opacity = 1 - (this.ratio/this.halflife);
-    const opacityRatio = this.ratio * opacity;
-    this.gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, (opacityRatio <= 0 ? 1 : opacityRatio));
-    this.gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
-    this.gradient.addColorStop(this.colorStop, `rgba(${this.color.r},${this.color.g},${this.color.b},${(opacity * .5)})`);
-    this.gradient.addColorStop(1.0, `rgba(${this.color.r},${this.color.g},${this.color.b}, 0)`);
-    this.ctx.fillStyle = this.gradient;
+    this.fillStyle = this.createGradient(this.gradient);
+    this.ctx.fillStyle = this.fillStyle;
     this.ctx.fill();
   }
 
@@ -62,9 +59,45 @@ class Point {
     this.ratio += this.dratio;
   }
 
+  createGradient(grads = []) {
+    const opacity = 1 - (this.ratio/this.halflife);
+    const opacityRatio = this.ratio * opacity;
+    const gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, (opacityRatio <= 0 ? 1 : opacityRatio));
+    if(grads) {
+      if(grads.length > 3) {
+        grads = grads.slice(0,4)
+      }
+
+      if(grads.length === 1) {
+        gradient.addColorStop(0, `rgba(${grads[0].r}, ${grads[0].g}, ${grads[0].b}, ${opacity})`)
+      }
+      else if(grads.length === 2) {
+        gradient.addColorStop(0, `rgba(${grads[0].r}, ${grads[0].g}, ${grads[0].b}, ${opacity})`)
+        gradient.addColorStop(1, `rgba(${grads[1].r}, ${grads[1].g}, ${grads[1].b}, 0)`)      
+      }
+      else {
+        gradient.addColorStop(0, `rgba(${grads[0].r}, ${grads[0].g}, ${grads[0].b}, ${opacity})`)
+        gradient.addColorStop(this.colorStop, `rgba(${grads[1].r}, ${grads[1].g}, ${grads[1].b}, ${(opacity * .5)})`)
+        gradient.addColorStop(1, `rgba(${grads[2].r}, ${grads[2].g}, ${grads[2].b}, 0)`)      
+      }
+    }
+    else {
+      gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
+      gradient.addColorStop(this.colorStop, `rgba(${this.color.r},${this.color.g},${this.color.b},${(opacity * .5)})`);
+      gradient.addColorStop(1.0, `rgba(${this.color.r},${this.color.g},${this.color.b}, 0)`);      
+    }
+
+    return gradient;
+  }
+
 
   recolor(color) {
     this.color = color;
+    this.gradient = null;
+  }
+
+  addGradient(newGradientArray) {
+    this.gradient = newGradientArray;
   }
 
   changeHalflife(newHalflife) {
