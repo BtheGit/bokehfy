@@ -7,7 +7,7 @@
 
 ### Getting Started
 
-In Node.js:
+#### In Node.js:
 
 ```
 npm i -S bokehfy
@@ -21,12 +21,20 @@ const bokehfy = require('bokehfy')
 ```
 
 
-In the browser:
+#### In the browser:
 
 Add bokehfy.min.js to your webpage.
 
 ```
 <script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.8/lib/bokehfy.min.js"></script>
+```
+
+#### Downloaded
+
+Download [Minified library](https://rawgit.com/BtheGit/bokehfy/master/lib/bokehfy.min.js)
+
+```
+import bokehfy from './bokehfy.min.js'
 ```
 
 #### Create a new Bokeh field instance by calling bokehfy()
