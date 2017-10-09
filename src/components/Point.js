@@ -4,19 +4,17 @@ class Point {
   constructor({
       canvas, 
       ctx, 
-      color = {r: 77, g: 101, b: 181},
-      gradient = null, 
-      halflifeRatio = 250,
-      maxRadius = 35,
-      maxDX = 5,
-      maxDY = 2
+      gradient = [{r: 255, g: 255, b: 255}], 
+      halflifeRatio = 450,
+      maxRadius = 80,
+      maxDX = 2,
+      maxDY = 0.5
     }) {
     this.max_dx = maxDX;
     this.max_dy = maxDY;
     this.max_r = maxRadius;
     this.canvas = canvas;
     this.ctx = ctx;
-    this.color = color;
     this.gradient = gradient;
     this.halflifeRatio = halflifeRatio;
     this.x = Math.random() * this.canvas.width;
@@ -83,18 +81,11 @@ class Point {
     }
     else {
       gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
-      gradient.addColorStop(this.colorStop, `rgba(${this.color.r},${this.color.g},${this.color.b},${(opacity * .5)})`);
-      gradient.addColorStop(1.0, `rgba(${this.color.r},${this.color.g},${this.color.b}, 0)`);      
     }
 
     return gradient;
   }
 
-
-  recolor(color) {
-    this.color = color;
-    this.gradient = null;
-  }
 
   addGradient(newGradientArray) {
     this.gradient = newGradientArray;

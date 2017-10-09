@@ -1,5 +1,6 @@
 'use strict'
 const Point = require('./Point');
+const DEFAULTS = require('./defaultSettings.js');
 
 class Field {
   constructor(canvas) {
@@ -8,28 +9,26 @@ class Field {
     this.canvas = canvas;
     this.ctx = canvas.getContext('2d');
     this.transparent = false;
-    this.BG = '#111';
-    this.pointColor = {r: 77, g: 101, b: 181};
-    this.gradient = null;
-    this.pointRadius = 35;
-    this.pointHalflife = 250;
-    this.pointDX = 5;
-    this.pointDY = 2;
+    this.BG = DEFAULTS.backgroundColor;
+    this.gradient = DEFAULTS.gradient;
+    this.pointRadius = DEFAULTS.radius;
+    this.pointHalflife = DEFAULTS.halflife;
+    this.pointDX = DEFAULTS.dx;
+    this.pointDY = DEFAULTS.dy;
     this.points = this._generatePoints();
     this.start()
   }
 
-  _setInterval(framerate = 30) {
+  _setInterval(framerate = DEFAULTS.framerate) {
     return 1000 / framerate;
   }
 
-  _generatePoints(density = 100) {
+  _generatePoints(density = DEFAULTS.density) {
     const points = [];
     for (let i = 0; i < density; i++) {
       points.push(new Point({
         canvas: this.canvas, 
         ctx: this.ctx, 
-        color: this.pointColor,
         maxRadius: this.pointRadius,
         halflifeRatio: this.pointHalflife,
         maxDX: this.pointDX,
@@ -43,10 +42,8 @@ class Field {
 
 
   _clear() {
-    if(this.transparent) {
-      this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
-    }
-    else {
+    this.ctx.clearRect(0,0, this.canvas.width, this.canvas.height)
+    if(!this.transparent) {
       this.ctx.fillStyle = this.BG;
       this.ctx.fillRect(0,0, this.canvas.width, this.canvas.height);
     }
@@ -91,13 +88,6 @@ class Field {
     else {
       this.start();
     }
-  }
-
-  recolorPoints(color) {
-    this.pointColor = color;
-    this.points.forEach(point => {
-      point.recolor(this.pointColor);
-    });
   }
 
   setGradient(colors) {

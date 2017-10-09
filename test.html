@@ -11,6 +11,12 @@
       width: 100%;
     }
 
+    .container {
+      height: 100%;
+      width: 100%;
+      background: #AAA;
+    }
+
     #test-div {
       height: 400px;
       width: 400px;
@@ -18,11 +24,13 @@
   </style>
 </head>
 <body>
-  <div id="test-div"></div>
+  <div class="container">
+    <div id="test-div"></div>
+  </div>
   <script src="./lib/bokehfy.js"></script>
   <script>
     const testDiv = document.getElementById('test-div')
-    const bokeh = bokehfy({color: 'blue', dx: 10, parent: testDiv, gradient: ['pink', 'red']})
+    const bokeh = bokehfy()
   </script>
 </body>
 </html>

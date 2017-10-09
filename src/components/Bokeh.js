@@ -13,6 +13,7 @@ class Bokeh {
       backgroundColor: this.backgroundColor,
       transparent: this.transparent,
       radius: this.radius,
+      star: this.star,
       color: this.color,
       gradient: this.gradient,
       density: this.density,
@@ -131,7 +132,14 @@ class Bokeh {
   color(newPointColor = '') {
     const color = tinyColor(newPointColor)
     if(color.isValid() && this.field) {
-      this.field.recolorPoints(color.toRgb());
+      this.field.setGradient([color.toRgb()]);
+    }
+  }
+
+  star(newStarColor = '') {
+    const color = tinyColor(newStarColor)
+    if(color.isValid() && this.field) {
+      this.field.setGradient([{r: 255, g: 255, b: 255}, color.toRgb(),color.toRgb()]);
     }
   }
 
@@ -153,8 +161,8 @@ class Bokeh {
   }
 
   halflife(newHalflife) {
-    if(this.field && isValidNumber(newHalfLife)) {
-      const fixedHalflife = fixInRange(newHalfLife, 0.00001,10000);
+    if(this.field && isValidNumber(newHalflife)) {
+      const fixedHalflife = fixInRange(newHalflife, 0.00001,10000);
       this.field.changeHalflife(fixedHalflife);
     }
   }
