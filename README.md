@@ -26,7 +26,7 @@ const bokehfy = require('bokehfy')
 Add bokehfy.min.js to your webpage.
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.8/lib/bokehfy.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.1.9/lib/bokehfy.min.js"></script>
 ```
 
 #### Downloaded
@@ -187,7 +187,7 @@ field.gradient(['white'])
 field.gradient(['orangered', 'salmon'])
 field.gradient(['white', 'red', 'blue'])
 ```
-*default = ['white']*
+*default = ['white', 'white', 'white']*
 
 Accepts an array of colors in order of colorstop from 0-1 (more than three will be truncated to the first three).
 
@@ -208,7 +208,7 @@ Passing a single color will create a 3 stop gradient using white as the first st
 ```
 field.radius(10)
 ```
-*default = 90*
+*default = 120*
 
 Pass valid number. Accepted range is 0.00001 - 1000. Valid numbers outside that range will be coerced to the nearest acceptable value.
 
@@ -216,7 +216,7 @@ Pass valid number. Accepted range is 0.00001 - 1000. Valid numbers outside that 
 ```
 field.halflife(500)
 ```
-*default = 450*
+*default = 750*
 
 Pass valid number. Accepted range is 0.00001 - 10000. Valid numbers outside that range will be coerced to the nearest acceptable value.
 
@@ -226,7 +226,7 @@ Halflife and radius work hand in hand. To better understand the relationship, yo
 ```
 field.density(100)
 ```
-*default = 70*
+*default = 90*
 
 Increase the number of points. Pass valid number. Accepted range is 0 - 2000. Valid numbers outside that range will be coerced to the nearest acceptable value.
 
@@ -244,7 +244,7 @@ Pass valid number. Accepted range is 0 - 10000. Valid numbers outside that range
 ```
 field.dx(0)
 ```
-*default = 4*
+*default = 2*
 
 Horizontal point speed. Pass valid number. Accepted range is 0 - 10000. Valid numbers outside that range will be coerced to the nearest acceptable value.
 

@@ -3,7 +3,7 @@ const field = bokehfy(canvas);
 field.backgroundColor('rgb(49, 159, 159)');
 field.density(40);
 field.framerate(20);
-field.color('#FFF');
+field.star('#FFF');
 field.halflife(742);
 field.radius(90);
 field.dx(2);
