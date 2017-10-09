@@ -8,6 +8,7 @@ const inFramerate = document.getElementById('in-framerate'),
       inBackground = document.getElementById('in-background'),
       inTransparent = document.getElementById('in-transparent'),
       inColor = document.getElementById('in-color'),
+      inStar = document.getElementById('in-star'),
       inDx = document.getElementById('in-dx'),
       inDy = document.getElementById('in-dy');
 
@@ -18,23 +19,24 @@ const liFramerate = inFramerate.addEventListener('input', changeFramerate),
       liBackground = inBackground.addEventListener('change', changeBackground),
       liTransparent = inTransparent.addEventListener('change', changeTransparent),
       liColor = inColor.addEventListener('change', changeColor),
+      liStar = inStar.addEventListener('change', changeStar),
       liDx = inDx.addEventListener('input', changeDx),
       liDy = inDy.addEventListener('input', changeDy);
 
 function changeFramerate(e) {
-  field.framerate(e.target.value)
+  field.framerate(Number(e.target.value))
 }
 
 function changeHalflife(e) {
-  field.halflife(e.target.value)
+  field.halflife(Number(e.target.value))
 }
 
 function changeRadius(e) {
-  field.radius(e.target.value)
+  field.radius(Number(e.target.value))
 }
 
 function changeDensity(e) {
-  field.density(e.target.value)
+  field.density(Number(e.target.value))
 }
 
 function changeBackground(e) {
@@ -45,14 +47,18 @@ function changeTransparent(e) {
   field.toggleBackground()
 }
 
+function changeStar(e) {
+  field.star(e.target.value)
+}
+
 function changeColor(e) {
   field.color(e.target.value)
 }
 
 function changeDx(e) {
-  field.dx(e.target.value)
+  field.dx(Number(e.target.value))
 }
 
 function changeDy(e) {
-  field.dy(e.target.value)
+  field.dy(Number(e.target.value))
 }

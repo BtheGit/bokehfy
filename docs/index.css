@@ -71,11 +71,25 @@ html, body {
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  flex-wrap: wrap;
+}
+
+.tool {
+  width: 85%;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 label {
   margin: 7px;
   letter-spacing: 1.2px;
+}
+
+input {
+  display: block;
 }
 
 input[type=range] {
