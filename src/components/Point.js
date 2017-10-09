@@ -25,7 +25,8 @@ class Point {
     this.halflife = this.halflifeRatio * (this.r / this.max_r);
     this.colorStop = (Math.random() * .2) + .4;
     this.ratio = Math.random() * this.halflife;
-    this.dratio = Math.random() + 1;    
+    this.dratio = Math.random() + 1;
+    this.gradient = null;
   }
 
   //### API
@@ -42,11 +43,11 @@ class Point {
 
     const opacity = 1 - (this.ratio/this.halflife);
     const opacityRatio = this.ratio * opacity;
-    const gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, (opacityRatio <= 0 ? 1 : opacityRatio));
-    gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
-    gradient.addColorStop(this.colorStop, `rgba(${this.color.r},${this.color.g},${this.color.b},${(opacity * .5)})`);
-    gradient.addColorStop(1.0, `rgba(${this.color.r},${this.color.g},${this.color.b}, 0)`);
-    this.ctx.fillStyle = gradient;
+    this.gradient = this.ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, (opacityRatio <= 0 ? 1 : opacityRatio));
+    this.gradient.addColorStop(0.0, 'rgba(255,255,255,' + opacity + ')');
+    this.gradient.addColorStop(this.colorStop, `rgba(${this.color.r},${this.color.g},${this.color.b},${(opacity * .5)})`);
+    this.gradient.addColorStop(1.0, `rgba(${this.color.r},${this.color.g},${this.color.b}, 0)`);
+    this.ctx.fillStyle = this.gradient;
     this.ctx.fill();
   }
 

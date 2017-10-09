@@ -1,6 +1,8 @@
 'use strict'
 const Field = require('./Field');
 const tinyColor = require('tinycolor2');
+const { isValidNumber, fixInRange } = require('../utilities/');
+
 
 class Bokeh {
   constructor(parentElement) {
@@ -88,10 +90,10 @@ class Bokeh {
     }
   }
 
-  //TODO: Validate input for numbers between a certain range
   radius(newMaxRadius) {
-    if(this.field) {
-      this.field.resizePoints(newMaxRadius);
+    if(this.field && isValidNumber(newMaxRadius)) {
+      const fixedMaxRadius = fixInRange(newMaxRadius, 0.00001, 1000);
+      this.field.resizePoints(fixedMaxRadius);
     }
   }
 
@@ -102,37 +104,38 @@ class Bokeh {
     }
   }
 
-  //TODO: Validate input for numbers between a certain range
   density(newDensity) {
-    if(this.field) {
-      this.field.changeDensity(newDensity);
+    if(this.field && isValidNumber(newDensity)) {
+      const fixedDensity = fixInRange(newDensity, 0, 2000);
+      this.field.changeDensity(fixedDensity);
     }
   }
 
-  //TODO: Validate input for numbers between a certain range
   halflife(newHalflife) {
-    if(this.field) {
-      this.field.changeHalflife(newHalflife);
+    if(this.field && isValidNumber(newHalfLife)) {
+      const fixedHalflife = fixInRange(newHalfLife, 0.00001,10000);
+      this.field.changeHalflife(fixedHalflife);
     }
   }
 
-  //TODO: Validate input for numbers between a certain range
   framerate(newFramerate) {
-    if(this.field) {
-      this.field.changeFramerate(newFramerate);
+    if(this.field && isValidNumber(newFramerate)) {
+      const fixedFramerate = fixInRange(newFramerate, 0, 10000);
+      this.field.changeFramerate(fixedFramerate);
     }
   }
 
-  //TODO: Validate input for numbers between a certain range
   dx(newDX) {
-    if(this.field) {
-      this.field.changeDX(newDX);
+    if(this.field && isValidNumber(newDX)) {
+      const fixedDX = fixInRange(newDX, 0, 10000);
+      this.field.changeDX(fixedDX);
     }
   }
-  //TODO: Validate input for numbers between a certain range
+
   dy(newDY) {
-    if(this.field) {
-      this.field.changeDY(newDY);
+    if(this.field && isValidNumber(newDY)) {
+      const fixedDY = fixInRange(newDY, 0, 10000);
+      this.field.changeDY(fixedDY);
     }
   }
 

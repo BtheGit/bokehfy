@@ -1,9 +1,6 @@
 'use strict'
 const Point = require('./Point');
 
-/**
- * A new canvas will be created
- */
 class Field {
   constructor(canvas) {
     this.interval = this._setInterval()
