@@ -16,7 +16,7 @@ class Field {
     this.pointDX = 5;
     this.pointDY = 2;
     this.points = this._generatePoints();
-    this._start()
+    this.start()
   }
 
   _setInterval(framerate = 30) {
@@ -40,28 +40,7 @@ class Field {
     return points;
   }
 
-  _start() {
-    let then = Date.now()
-    let delta;
 
-    const draw = timestamp => {
-      const now = Date.now(timestamp);
-      delta = now - then;
-      if(delta > this.interval) {
-        this._clear();
-        this._animatePoints();
-
-        then = now - (delta % this.interval)
-      }
-      this.animationFrame = requestAnimationFrame(draw);
-    }
-    this.animationFrame = requestAnimationFrame(draw)
-  }
-
-  _stop() {
-    cancelAnimationFrame(this.animationFrame)
-    this.animationFrame = null;
-  }
 
   _clear() {
     if(this.transparent) {
@@ -82,12 +61,35 @@ class Field {
   }
 
   //### API
+  start() {
+    let then = Date.now()
+    let delta;
+
+    const draw = timestamp => {
+      const now = Date.now(timestamp);
+      delta = now - then;
+      if(delta > this.interval) {
+        this._clear();
+        this._animatePoints();
+
+        then = now - (delta % this.interval)
+      }
+      this.animationFrame = requestAnimationFrame(draw);
+    }
+    this.animationFrame = requestAnimationFrame(draw)
+  }
+
+  stop() {
+    cancelAnimationFrame(this.animationFrame)
+    this.animationFrame = null;
+  }
+
   pause() {
     if(this.animationFrame) {
-      this._stop();
+      this.stop();
     } 
     else {
-      this._start();
+      this.start();
     }
   }
 

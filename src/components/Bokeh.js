@@ -3,9 +3,12 @@ const Field = require('./Field');
 const tinyColor = require('tinycolor2');
 const { isValidNumber, fixInRange } = require('../utilities/');
 
+//a) no arg = background for parent and default settings
+//b) arg = instanceof Element
+//b1) arg = object containing parent that is an instanceof
 
 class Bokeh {
-  constructor(parentElement) {
+  constructor(settings) {
     this.API = {
       backgroundColor: this.backgroundColor,
       transparent: this.transparent,
@@ -18,9 +21,12 @@ class Bokeh {
       dx: this.dx,
       dy: this.dy
     }
-    this.parent = parentElement;
+    this.settingsParams = settings;
+    this.parent = this.settingsParams.parent;
     this.canvas = this._createCanvas(this.parent);
-    this.field = this._init(this.canvas);
+    this.field = this._initField(this.canvas);
+    this.settings(this.settingsParams);
+
     this._fitCanvas = this._fitCanvas.bind(this);
     window.addEventListener('resize', this._fitCanvas)
   };
@@ -32,7 +38,7 @@ class Bokeh {
    * @param  {Node} parentNode [Optional: Parent element that will contain the canvas]
    * @return {Field}        [An instance of the bokehfy field with public methods]
    */
-  _init() {
+  _initField() {
     this._fitCanvas()
     const field = new Field(this.canvas)
     return field;    
@@ -62,15 +68,24 @@ class Bokeh {
     this.canvas.setAttribute('height', height)    
   }
 
+
   //#### API
+  start() {
+    this.field.start();
+  }
+
+  stop() {
+    this.field.stop();
+  }
 
   pause() {
     this.field.pause();
   }
 
   delete() {
-    window.removeEventListener('resize', this._fitCanvas)
-    this.parent.removeChild(this.canvas)
+    this.field.stop();
+    window.removeEventListener('resize', this._fitCanvas);
+    this.parent.removeChild(this.canvas);
   }
 
   settings(obj) {
