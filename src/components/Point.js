@@ -1,14 +1,15 @@
 'use strict'
+const DEFAULT = require('./defaultSettings.js');
 
 class Point {
   constructor({
       canvas, 
       ctx, 
-      gradient = [{r: 255, g: 255, b: 255}], 
-      halflifeRatio = 450,
-      maxRadius = 80,
-      maxDX = 2,
-      maxDY = 0.5
+      gradient = DEFAULT.gradient, 
+      halflifeRatio = DEFAULT.halflife,
+      maxRadius = DEFAULT.radius,
+      maxDX = DEFAULT.dx,
+      maxDY = DEFAULT.dy
     }) {
     this.max_dx = maxDX;
     this.max_dy = maxDY;

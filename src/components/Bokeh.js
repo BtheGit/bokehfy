@@ -3,10 +3,6 @@ const Field = require('./Field');
 const tinyColor = require('tinycolor2');
 const { isValidNumber, fixInRange } = require('../utilities/');
 
-//a) no arg = background for parent and default settings
-//b) arg = instanceof Element
-//b1) arg = object containing parent that is an instanceof
-
 class Bokeh {
   constructor(settings) {
     this.API = {
