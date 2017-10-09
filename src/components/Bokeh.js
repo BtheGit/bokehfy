@@ -94,8 +94,8 @@ class Bokeh {
     }
   }
 
-  transparent(isTrans) {
-    if(this.field) {
+  transparent(isTrans = false) {
+    if(this.field && typeof isTrans === 'boolean') {
       this.field.setTransparency(isTrans);
     }
   }

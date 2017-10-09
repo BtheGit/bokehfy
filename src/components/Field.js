@@ -113,6 +113,10 @@ class Field {
     this.transparent = !this.transparent;
   }
 
+  setTransparency(isTrans) {
+    this.transparent = isTrans;
+  }
+
   resizePoints(newMaxRadius) {
     this.pointRadius = newMaxRadius;
     this.points.forEach(point => {
