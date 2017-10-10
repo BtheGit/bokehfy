@@ -6,17 +6,17 @@ const { isValidNumber, fixInRange } = require('../utilities/');
 class Bokeh {
   constructor(settings) {
     this.API = {
+      density: this.density,
       backgroundColor: this.backgroundColor,
       transparent: this.transparent,
       radius: this.radius,
       star: this.star,
       color: this.color,
+      dx: this.dx,
+      dy: this.dy,
       gradient: this.gradient,
-      density: this.density,
       halflife: this.halflife,
       framerate: this.framerate,
-      dx: this.dx,
-      dy: this.dy
     }
     this.settingsParams = settings;
     this.parent = this.settingsParams.parent;

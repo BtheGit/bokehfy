@@ -29,11 +29,11 @@ class Field {
       points.push(new Point({
         canvas: this.canvas, 
         ctx: this.ctx, 
-        maxRadius: this.pointRadius,
+        gradient: this.gradient,
         halflifeRatio: this.pointHalflife,
+        maxRadius: this.pointRadius,
         maxDX: this.pointDX,
         maxDY: this.pointDY,
-        gradient: this.gradient
       }))
     }
     return points;

@@ -27,10 +27,10 @@
   <div class="container">
     <div id="test-div"></div>
   </div>
-  <script src="./lib/bokehfy.min.js"></script>
+  <script src="./lib/bokehfy.js"></script>
   <script>
     const testDiv = document.getElementById('test-div')
-    const bokeh = bokehfy()
+    const bokeh = bokehfy({dy: 20, density: 100, dx: 100})
   </script>
 </body>
 </html>

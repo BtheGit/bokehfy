@@ -11,18 +11,18 @@ class Point {
       maxDX = DEFAULT.dx,
       maxDY = DEFAULT.dy
     }) {
-    this.max_dx = maxDX;
-    this.max_dy = maxDY;
-    this.max_r = maxRadius;
     this.canvas = canvas;
     this.ctx = ctx;
     this.gradient = gradient;
     this.halflifeRatio = halflifeRatio;
+    this.max_r = maxRadius;
+    this.max_dx = maxDX;
+    this.max_dy = maxDY;
     this.x = Math.random() * this.canvas.width;
     this.y = Math.random() * this.canvas.height;
     this.r = (Math.random() * this.max_r) + 1;
     this.dx = (Math.random() * this.max_dx) * (Math.random() > .5 ? -1 : 1);
-    this.dy = (Math.random() * this.max_dx) * (Math.random() > .5 ? -1 : 1);
+    this.dy = (Math.random() * this.max_dy) * (Math.random() > .5 ? -1 : 1);
     this.halflife = this.halflifeRatio * (this.r / this.max_r);
     this.colorStop = (Math.random() * .2) + .4;
     this.ratio = Math.random() * this.halflife;
