@@ -85,6 +85,12 @@ html, body {
 label {
   margin: 7px;
   letter-spacing: 1.2px;
+  text-align: right;
+}
+
+.tool.slider label {
+  width: 100px;
+  
 }
 
 input {
