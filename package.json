@@ -1,6 +1,6 @@
 {
   "name": "bokehfy",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "description": "Add a flickering bokeh experience to any DOM element.",
   "main": "./lib/bokehfy.min.js",
   "scripts": {
