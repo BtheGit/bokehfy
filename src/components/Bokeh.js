@@ -85,6 +85,10 @@ class Bokeh {
     this.parent.removeChild(this.canvas);
   }
 
+  getSettings() {
+    return this.field.getSettings();
+  }
+
   settings(obj) {
     if(obj === Object(obj) && typeof obj === 'object') {
       const array = Object.entries(obj);
@@ -102,7 +106,7 @@ class Bokeh {
   backgroundColor(newColor = '') {
     const color = tinyColor(newColor);
     if(color.isValid() && this.field) {
-      this.field.changeBackgroundColor(color.toHexString());
+      this.field.changeBackgroundColor(color.toRgbString());
     }
   }
 
@@ -183,6 +187,25 @@ class Bokeh {
       this.field.changeDY(fixedDY);
     }
   }
+
+  stepDx(increment) {
+    if(this.field && isValidNumber(increment)) {
+      this.field.stepDX(increment);
+    }
+  }
+
+  stepDy(increment) {
+    if(this.field && isValidNumber(increment)) {
+      this.field.stepDY(increment);
+    }
+  }
+
+  stepRadius(increment) {
+    if(this.field && isValidNumber(increment)) {
+      this.field.stepRadius(increment);
+    }
+  }
+
 
 }
 

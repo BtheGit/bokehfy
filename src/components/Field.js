@@ -1,6 +1,7 @@
 'use strict'
 const Point = require('./Point');
 const DEFAULTS = require('./defaultSettings.js');
+const tinyColor = require('tinycolor2');
 
 class Field {
   constructor(canvas) {
@@ -88,6 +89,22 @@ class Field {
     }
   }
 
+  getSettings() {
+    const newBG = tinyColor(this.BG).toRgb()
+    const newGradient = this.gradient.map(color => tinyColor(color).toRgb())
+    const settings = {
+      transparent: this.transparent,
+      backgroundColor: newBG,
+      gradient: newGradient,
+      radius: this.pointRadius,
+      halflife: this.pointHalflife,
+      dx: this.pointDX,
+      dy: this.pointDY,
+      density: this.points.length
+    }
+    return settings;
+  }
+
   setGradient(colors) {
     this.gradient = colors;
     this.points.forEach(point => {
@@ -136,6 +153,27 @@ class Field {
     this.pointDY = newDY;
     this.points.forEach(point => {
       point.changeDY(this.pointDY)
+    })
+  }
+
+  stepDX(increment) {
+    this.pointDX += increment;
+    this.points.forEach(point => {
+      point.stepDX(increment);
+    })
+  }
+
+  stepDY(increment) {
+    this.pointDY += increment;
+    this.points.forEach(point => {
+      point.stepDY(increment);
+    })
+  }
+
+  stepRadius(increment) {
+    this.pointRadius += increment;
+    this.points.forEach(point => {
+      point.stepRadius(increment);
     })
   }
 

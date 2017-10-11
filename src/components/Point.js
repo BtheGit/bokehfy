@@ -112,6 +112,39 @@ class Point {
     this.max_dy = newDY;
     this.dy = (Math.random() * this.max_dy) * (Math.random() > .5 ? -1 : 1);
   }
+
+  stepDX(increment) {
+    this.max_dx += increment;
+    if(this.dx === 0) {
+      this.dx += (increment * (Math.random() > .5 ? -1 : 1));
+    }
+    else if (this.dx < 0) {
+      this.dx -= increment;
+    }
+    else {
+      this.dx += increment;
+    }
+  }
+
+  stepDY(increment) {
+    this.max_dy += increment;
+    if(this.dy === 0) {
+      this.dy += (increment * (Math.random() > .5 ? -1 : 1));
+    }
+    else if (this.dy < 0) {
+      this.dy -= increment;
+    }
+    else {
+      this.dy += increment;
+    }
+  }
+
+  stepRadius(increment) {
+    const newRadius = this.r + increment;
+    const newMaxRadius = this.max_r + increment;
+    this.max_r = newMaxRadius >= 0 ? newMaxRadius : 0;
+    this.r = newRadius >= 0 ? newRadius : 0;
+  }
 }
 
 module.exports = Point;

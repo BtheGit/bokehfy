@@ -5,7 +5,7 @@
 
 ![Screenshot](bokehfy2.png)
 
-### Getting Started
+## Getting Started
 
 #### In Node.js:
 
@@ -113,11 +113,16 @@ bokehfy() will return null in the case of an invalid parent element being passed
 - dx: number (0 - 10000),
 - dy: number (0 - 10000)
 
-Please note that color, star, and gradient will overwrite each other. JS does not guarantee which order an object will be iterated through and it's not possible to guarantee which value will end up being processed last and therefore displayed.
+Note: Color, star, and gradient will overwrite each other. JS does not guarantee which order an object will be iterated through and it's not possible to guarantee which value will end up being processed last and therefore displayed.
+
+Note: The canvas object that bokeh creates is absolutely positioned. If the element you attach it to does not have relative positioning set, the canvas may not behave as expected.
+
 
 ---
 
-*bokehfy() makes use of [Tiny Color](https://github.com/bgrins/TinyColor) for color validation and conversion. Any valid CSS color format should work. Currently, alpha values are not supported.*
+*bokehfy() makes use of [Tiny Color](https://github.com/bgrins/TinyColor) for color validation and conversion. Any valid CSS color format should work. Currently, alpha values are not supported.
+
+If you wish to use a smaller custom version of this library without color verification. You can easily remove Tiny Color from the Bokeh API color methods and it should reduce the bundle size by 60%*
 
 ---
 
