@@ -120,7 +120,7 @@ Note: The canvas object that bokeh creates is absolutely positioned. If the elem
 
 ---
 
-*bokehfy() makes use of [Tiny Color](https://github.com/bgrins/TinyColor) for color validation and conversion. Any valid CSS color format should work. Currently, alpha values are not supported.
+*bokehfy() makes use of [Tiny Color](https://github.com/bgrins/TinyColor) for color validation and conversion. Any valid CSS color format should work.
 
 If you wish to use a smaller custom version of this library without color verification. You can easily remove Tiny Color from the Bokeh API color methods and it should reduce the bundle size by 60%*
 
@@ -154,6 +154,29 @@ field.delete()
 
 Stop animation, remove window listeners, and remove the field instance from its DOM parent.
 
+#### getSettings
+```
+const currentState = field.getSettings()
+//{
+//    transparent: false,
+//    backgroundColor: {r: 0, g: 0, b: 0, a: 0.5},
+//    gradient: [
+//        {r: 255, g: 255, b: 255, a: 1},
+//        {r: 255, g: 255, b: 255, a: 1},
+//        {r: 255, g: 255, b: 255, a: 1}
+//    ],
+//    radius: 88,
+//    halflife: 450,
+//    dx: 5,
+//    dy: 0.2,
+//    density: 100   
+//}
+```
+
+Returns an object representing the current field settings. (Individual points will deviate from the inital maximum dx, dy, and radius settings).
+
+NOTE: Colors will be returned as an object with r,g,b,a keys.
+
 #### toggleBackground
 ```
 field.toggleBackground()
@@ -174,9 +197,9 @@ Set background transparency by passing a boolean value.
 field.backgroundColor('purple')
 field.backgroundColor('#00FF00')
 ```
-*default = 'rgb(49, 159, 159)'*
+*default = 'rgba(49, 159, 159, 1)'*
 
-Set new background color by passing a valid color as a string. 
+Set new background color by passing a valid color as a string. Alpha values are supported for background color.
 
 ### color
 ```
@@ -185,6 +208,7 @@ field.color('#ABC')
 *no default*
 
 Creates a solid color point with no gradient. Equivalent to calling gradient with an array with one element. eg ```field.gradient(['white])```
+*Alpha values not supported (auto generated)*
 
 #### gradient
 ```
@@ -199,6 +223,8 @@ Accepts an array of colors in order of colorstop from 0-1 (more than three will 
 * One color will create a solid color point with no gradient.
 * Two colors will create a gradient with the first color at stop 0 and the second at stop 1.
 * Three colors will create a gradient with the first color at stop 0, the third at stop 1, and the second at a randomized stop somewhere between 0.4 and 0.6.
+*Alpha values not supported (auto generated)*
+
 
 #### star
 ```
@@ -207,6 +233,8 @@ field.star('blue')
 *no default*
 
 Passing a single color will create a 3 stop gradient using white as the first stop and the passed color as the next two.
+*Alpha values not supported (auto generated)*
+
 
 #### radius
 
@@ -216,6 +244,18 @@ field.radius(10)
 *default = 120*
 
 Pass valid number. Accepted range is 0.00001 - 1000. Valid numbers outside that range will be coerced to the nearest acceptable value.
+
+#### stepRadius
+
+```
+field.stepRadius(0.5)
+```
+
+Pass valid number. Current radius will be incremented by passed value. 
+
+NOTE: If you increment the radius value directly with field.radius(), it will be randomized as if initially seeding. Use this method for smooth animations.
+
+NOTE: If you seed radius at 0, all values will be equal sized. To have a range of point sizes, seed with a non-zero value before animating with this function.
 
 #### halflife
 ```
@@ -253,6 +293,15 @@ field.dx(0)
 
 Horizontal point speed. Pass valid number. Accepted range is 0 - 10000. Valid numbers outside that range will be coerced to the nearest acceptable value.
 
+#### stepDx
+```
+field.stepDx(0.5)
+```
+
+Pass valid number. Current dx will be incremented by passed value. 
+NOTE: If you increment the dx value directly with field.dx(), it will be randomized as if initially seeding. Use this method for smooth animations.
+
+
 #### dy
 ```
 field.dy(10)
@@ -260,6 +309,14 @@ field.dy(10)
 *default = 2*
 
 Vertical point speed. Pass valid number. Accepted range is 0 - 10000. Valid numbers outside that range will be coerced to the nearest acceptable value.
+
+#### stepDy
+```
+field.stepDy(0.5)
+```
+
+Pass valid number. Current dy will be incremented by passed value. 
+NOTE: If you increment the dy value directly with field.dy(), it will be randomized as if initially seeding. Use this method for smooth animations.
 
 #### settings
 ```
