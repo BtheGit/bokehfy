@@ -26,7 +26,7 @@ const bokehfy = require('bokehfy')
 Add bokehfy.min.js to your webpage.
 
 ```
-<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.2.0/lib/bokehfy.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bokehfy@0.2.1/lib/bokehfy.min.js"></script>
 ```
 
 #### Downloaded
