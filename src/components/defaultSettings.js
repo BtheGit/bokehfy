@@ -7,7 +7,8 @@ const defaults = {
   halflife: 750,
   radius: 120,
   dx: 2,
-  dy: 2
+  dy: 2,
+  interactive: false,
 }
 
 module.exports = defaults;

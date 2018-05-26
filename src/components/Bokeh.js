@@ -17,6 +17,7 @@ class Bokeh {
       gradient: this.gradient,
       halflife: this.halflife,
       framerate: this.framerate,
+      interactive: this.interactive,
     }
     this.settingsParams = settings;
     this.parent = this.settingsParams.parent;
@@ -203,6 +204,12 @@ class Bokeh {
   stepRadius(increment) {
     if(this.field && isValidNumber(increment)) {
       this.field.stepRadius(increment);
+    }
+  }
+
+  interactive(isInteractive = false){
+    if(this.field && typeof isInteractive === 'boolean'){
+      this.field.setInteractiveState(isInteractive);
     }
   }
 

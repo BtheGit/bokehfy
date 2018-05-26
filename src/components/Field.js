@@ -1,5 +1,6 @@
 'use strict'
 const Point = require('./Point');
+const Mouse = require('./Mouse');
 const DEFAULTS = require('./defaultSettings.js');
 const tinyColor = require('tinycolor2');
 
@@ -16,6 +17,8 @@ class Field {
     this.pointHalflife = DEFAULTS.halflife;
     this.pointDX = DEFAULTS.dx;
     this.pointDY = DEFAULTS.dy;
+    this.isInteractive = false;
+    this.Mouse = new Mouse(this.canvas);
     this.points = this._generatePoints();
     this.start()
   }
@@ -51,6 +54,9 @@ class Field {
   _animatePoints() {
     for(let i = 0; i < this.points.length; i++) {
       this.points[i].pulse();
+      if(this.isInteractive){
+        this.points[i].interact(this.Mouse);
+      }
       this.points[i].draw();
       this.points[i].move();
     }      
@@ -179,6 +185,10 @@ class Field {
 
   changeFramerate(newFramerate) {
     this.interval = this._setInterval(newFramerate);
+  }
+
+  setInteractiveState(isInteractive){
+    this.isInteractive = isInteractive;
   }
 }
 

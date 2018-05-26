@@ -32,6 +32,19 @@ class Point {
 
   //### API
 
+  _checkFocus(mouse){
+    const xdist = Math.abs(this.x - mouse.x);
+    const ydist = Math.abs(this.y - mouse.y);
+    return (xdist * .9) <= this.r && (ydist * .9) <= this.r;
+  }
+
+  interact(mouse){
+    const isFocused = this._checkFocus(mouse);
+    if(isFocused) {
+      this.ratio = .001;
+    }
+  }
+
   draw() {
     if(this.ratio <= 0 || this.ratio >= this.halflife) {
       this.dratio *= -1;
